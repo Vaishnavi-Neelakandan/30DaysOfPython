@@ -11,16 +11,20 @@ special_char = "@$%^&*!~?"  # I defined only specific special characters instead
 # Combine them into one string
 input_string = lowercase_letters + uppercase_letters + numbers + special_char
 # Step 2: Ask the user how long the password should be
-while True:
-    length = int(input("Enter the password length: "))
-    # Make sure password is at least 1 character long
-    if length != 8:
-        print("Password length must be 8 characters. Please try again")
-    else:
+length = int(input("Enter the password length: "))
+
+# Make sure password is at least 1 character long
+if length < 1:
+    print("Password length must be at least 1")
+else:
     # Step 3: Ensure the first character is a letter
-        password = ""
-        for i in range(length):
-            random_char = random.choice(input_string)
-            password += random_char
-        print("Generated Password:", password)
-        break 
+    first_char = random.choice(lowercase_letters + uppercase_letters)
+
+    # Step 4: Generate the remaining characters
+    remaining_chars = ""
+    for i in range(length - 1):
+        remaining_chars += random.choice(input_string)
+
+    # Step 3: Combine and display the password
+    password = first_char + remaining_chars
+    print("Generated Password:", password)
